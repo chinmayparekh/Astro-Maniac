@@ -70,10 +70,9 @@
 // }
 
 #include "Game.hpp"
-#include "TextureManager.hpp"
-#include "GameObject.hpp"
+#include "Player.hpp"
 
-GameObject *player;
+Player *player;
 GameObject *obstacle;
 GameObject *background;
 SDL_Renderer *Game::renderer = nullptr;
@@ -108,7 +107,7 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 		isRunning = true;
 	}
 
-	player = new GameObject("images/astronaut.png", 430, 800, 80, 80);
+	player = new Player("images/astronaut.png", 430, 800, 80, 80);
 	obstacle = new GameObject("images/meteor.png", 850, 400, 80, 80);
 	background = new GameObject("images/space.png", 0, 0, 900, 900);
 }

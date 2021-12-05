@@ -1,5 +1,9 @@
-#include "Game.hpp"
+#ifndef GameObject_hpp
+#define GameObject_hpp
 
+#include "Game.hpp"
+#include "main.hpp"
+#include "TextureManager.hpp"
 class GameObject
 {
 public:
@@ -9,7 +13,7 @@ public:
     void update(int p, int q);
     void Render();
 
-private:
+protected:
     int xpos;
     int ypos;
     int w;
@@ -18,3 +22,4 @@ private:
     SDL_Texture *objTexture;
     SDL_Rect srcRect, destRect;
 };
+#endif //GAMEOBJECT_HPP 

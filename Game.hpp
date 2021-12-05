@@ -1,9 +1,9 @@
-#pragma once
+#ifndef Game_hpp
+#define Game_hpp
 
-#include "SDL2/SDL.h"
-#include <SDL2/SDL_image.h>
-#include <iostream>
+#include "GameObject.hpp"
 
+#include "main.hpp"
 class Game
 {
 public:
@@ -18,9 +18,14 @@ public:
     void render();
     void clean();
     static SDL_Renderer *renderer;
+    // static SDL_Event *event;
+    // friend class TextureManager;
+    // friend class GameObject;
 
 private:
     bool isRunning = false;
     int cnt = 0;
     SDL_Window *window;
 };
+
+#endif //GAME_H
