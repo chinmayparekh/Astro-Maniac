@@ -1,26 +1,3 @@
-// #include "Game.hpp"
-
-// Game *game = nullptr;
-// int main(int argc, char *argv[])
-// {
-//     game = new Game();
-//     // while (game is running)
-//     // {
-//     //     handle any user input
-//     //     update all objects in the scene
-//     //     render changes to the display
-//     // }
-//     game->init("Astro Maniac",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,800,600,false);
-//     while (game->running())
-//     {
-//         game->handleEvents();
-//         game->update();
-//         game->render();
-//     }
-//     game->clean();
-//     return 0;
-// }
-
 #include "Game.hpp"
 
 Game *game = nullptr;
@@ -34,7 +11,7 @@ int main(int argc, char *argv[])
     int frameTime;
 
     game = new Game();
-    game->init("GameWindow", 900, 900, false);//wdith height
+    game->init("GameWindow", 900, 900, false);
 
     while (game->running())
     {
@@ -45,14 +22,11 @@ int main(int argc, char *argv[])
 
         frameTime = SDL_GetTicks() - frameStart;
 
-        if(frameDelay > frameTime)
+        if (frameDelay > frameTime)
         {
             SDL_Delay(frameDelay - frameTime);
         }
     }
-
-
-
     game->clean();
     return 0;
 }
