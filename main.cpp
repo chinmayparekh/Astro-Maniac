@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     int frameTime;
 
     game = new Game();
-    game->init("GameWindow", 600, 900, true);//wdith height
+    game->init("GameWindow", 900, 900, false);//wdith height
 
     while (game->running())
     {

@@ -108,9 +108,9 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 		isRunning = true;
 	}
 
-	player = new GameObject("images/astronaut.png",renderer,600,800,70,70);
-	obstacle = new GameObject("images/meteor.png",renderer,1000,400,80,80);
-	background = new GameObject("images/space.png",renderer,0,0,1300,1000);
+	player = new GameObject("images/astronaut.png",renderer,430,800,80,80);
+	obstacle = new GameObject("images/meteor.png",renderer,850,400,80,80);
+	background = new GameObject("images/space.png",renderer,0,0,900,900);
 
     // SDL_Surface* tmpSurface = IMG_Load("images/astronaut.png");
     // playerTex = SDL_CreateTextureFromSurface(renderer,tmpSurface);
