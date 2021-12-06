@@ -16,6 +16,7 @@ public:
     int getY() { return ypos; }
     int getHeight() { return h; }
     int getWidth() { return w; }
+    void handleEvents();
 
 protected:
     int xpos;
