@@ -9,10 +9,19 @@ GameObject::GameObject(const char *texturesheet, int x, int y, int width, int he
     h = height;
 }
 
+// void GameObject::update(int p, int q)
+// {
+//     destRect.x = xpos - p;
+//     destRect.y = ypos + q;
+//     destRect.w = w;
+//     destRect.h = h;
+// }
 void GameObject::update(int p, int q)
 {
-    destRect.x = xpos - p;
-    destRect.y = ypos + q;
+    xpos += p;
+    ypos += q;
+    destRect.x = xpos;
+    destRect.y = ypos;
     destRect.w = w;
     destRect.h = h;
 }

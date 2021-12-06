@@ -12,6 +12,10 @@ public:
 
     void update(int p, int q);
     void Render();
+    int getX() { return xpos; }
+    int getY() { return ypos; }
+    int getHeight() { return h; }
+    int getWidth() { return w; }
 
 protected:
     int xpos;
@@ -22,4 +26,4 @@ protected:
     SDL_Texture *objTexture;
     SDL_Rect srcRect, destRect;
 };
-#endif //GAMEOBJECT_HPP 
+#endif //GAMEOBJECT_HPP
