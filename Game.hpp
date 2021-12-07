@@ -19,6 +19,7 @@ public:
     void clean();
     static SDL_Renderer *renderer;
     static SDL_Event event;
+    // static bool isCollided;
     // static SDL_Event *event;
     // friend class TextureManager;
     // friend class GameObject;

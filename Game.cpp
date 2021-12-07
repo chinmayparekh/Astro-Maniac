@@ -72,16 +72,26 @@ inline double distanceSq(int x1, int y1, int x2, int y2)
 	return ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
 
+bool checkCollision(GameObject *go)
+{
+	if ((distanceSq(go->getX(), go->getY(), player->getX(), player->getY()) < 10000)) //checking collision
+	{
+		player = NULL;
+		return true;
+	}
+	return false;
+}
 void Game::update()
 {
 	if (player != NULL)
 	{
 		player->update(a, 0);
+		if(checkCollision(obstacle))
+		{
+			isRunning = false;
+		}
 	}
-	if (player != NULL && (distanceSq(obstacle->getX(), obstacle->getY(), player->getX(), player->getY()) < 8000))
-	{
-		player = NULL;
-	}
+
 	obstacle->update(-2, 2);
 	background->update(0, 0);
 }
