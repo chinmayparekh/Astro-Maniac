@@ -42,9 +42,9 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 		isRunning = true;
 	}
 
-	player = new Player("images/astronaut.png", 430, 800, 80, 80);
+	player = new Player("images/astronaut.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
-	background = new GameObject("images/space.png", 0, 0, 900, 900);
+	background = new GameObject("images/space.jpg", 0, 0, 900, 900);
 }
 
 void Game::handleEvents()
@@ -74,13 +74,13 @@ inline double distanceSq(int x1, int y1, int x2, int y2)
 
 void Game::update()
 {
-	if (player != NULL && (distanceSq(obstacle->getX(), obstacle->getY(), player->getX(), player->getY()) < 4000))
-	{
-		player = NULL;
-	}
 	if (player != NULL)
 	{
 		player->update(a, 0);
+	}
+	if (player != NULL && (distanceSq(obstacle->getX(), obstacle->getY(), player->getX(), player->getY()) < 8000))
+	{
+		player = NULL;
 	}
 	obstacle->update(-2, 2);
 	background->update(0, 0);
