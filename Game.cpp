@@ -1,12 +1,16 @@
 #include "Game.hpp"
 #include "Player.hpp"
+#include "Alien.hpp"
 #include "Obstacle.hpp"
+#include <bits/stdc++.h>
+#include <time.h>
 
 Player *player;
 Obstacle *obstacle;
 GameObject *background;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
+Alien *aliens[2];
 using namespace std;
 
 int a = 0;
@@ -41,10 +45,14 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 
 		isRunning = true;
 	}
-
+	srand(time(0));
 	player = new Player("images/astronaut.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
 	background = new GameObject("images/space.jpg", 0, 0, 900, 900);
+	for (int i = 0; i < 2; i++)
+	{
+		aliens[i] = new Alien("images/alien.png", rand() % 800, 0, 80, 80);
+	}
 }
 
 void Game::handleEvents()
@@ -55,8 +63,14 @@ void Game::handleEvents()
 	case SDL_QUIT:
 		isRunning = false;
 		break;
-	case SDLK_ESCAPE:
-		isRunning = false;
+	case SDL_KEYDOWN:
+		switch (event.key.keysym.sym)
+		{
+			case SDLK_ESCAPE:
+					isRunning = false;
+					break;
+		}
+		break;
 	default:
 		break;
 	}
@@ -72,9 +86,9 @@ inline double distanceSq(int x1, int y1, int x2, int y2)
 	return ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
 
-bool checkCollision(GameObject *go)
+bool checkCollision(GameObject *go, int dis)
 {
-	if ((distanceSq(go->getX(), go->getY(), player->getX(), player->getY()) < 10000)) //checking collision
+	if ((distanceSq(go->getX(), go->getY(), player->getX(), player->getY()) < dis)) //checking collision
 	{
 		player = NULL;
 		return true;
@@ -83,16 +97,23 @@ bool checkCollision(GameObject *go)
 }
 void Game::update()
 {
+	if(!isRunning)
+		return;
 	if (player != NULL)
 	{
 		player->update(a, 0);
-		if(checkCollision(obstacle))
+		obstacle->update(-2, 2);
+		isRunning = !(checkCollision(obstacle, 10000));
+		if (!isRunning)
+			return;
+		for (int i = 0; i < 2; i++)
 		{
-			isRunning = false;
+			aliens[i]->update();
+			isRunning = !(checkCollision(aliens[i], 2000));
+			if (!isRunning)
+				return;
 		}
 	}
-
-	obstacle->update(-2, 2);
 	background->update(0, 0);
 }
 
@@ -103,6 +124,10 @@ void Game::render()
 	if (player != NULL)
 	{
 		player->Render();
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		aliens[i]->Render();
 	}
 	obstacle->Render();
 	SDL_RenderPresent(renderer);
