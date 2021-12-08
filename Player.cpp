@@ -45,34 +45,34 @@ void Player::handleEvents()
 void Player::Animate()
 {
     move++;
-    if ((vel_X > 0 || move < 60) && dir == 2)
+    if ((vel_X > 0 || move < 30) && dir == 2)
     {
         moving = true;
-        if (move < 12)
+        if (move < 6)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/right0.png"));
-        else if (move < 24)
+        else if (move < 12)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/right1.png"));
         // else if(move < 45)
         //     objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/right2.png"));
-        else if (move < 36)
+        else if (move < 18)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/right2.png"));
-        else if (move < 48)
+        else if (move < 24)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/right1.png"));
         else
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/right0.png"));
     }
-    else if ((vel_X < 0 || move < 60) && dir == 1)
+    else if ((vel_X < 0 || move < 30) && dir == 1)
     {
         moving = true;
-        if (move < 12)
+        if (move < 6)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/left0.png"));
-        else if (move < 24)
+        else if (move < 12)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/left1.png"));
         // else if(move < 45)
         //     objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/left2.png"));
-        else if (move < 36)
+        else if (move < 18)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/left2.png"));
-        else if (move < 48)
+        else if (move < 24)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/left1.png"));
         else
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/left0.png"));
