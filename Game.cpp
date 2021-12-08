@@ -52,19 +52,17 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 	for (int i = 0; i < 3; i++)
 	{
 		aliens[i] = new Alien("images/alien.png", rand() % 800, 0, 80, 80);
-		// cout << "Making alien" << endl;
 	}
 }
 
-bool AlienReachedEndpoint(Alien *alien)
-{
-	// cout << "Alien's y coordinate = " << alien->getY() << endl;
-	if (alien->getY() >= 900)
-	{
-		return true;
-	}
-	return false;
-}
+// bool AlienReachedEndpoint(Alien *alien)
+// {
+// 	if (alien->getY() >= 900)
+// 	{
+// 		return true;
+// 	}
+// 	return false;
+// }
 void Game::handleEvents()
 {
 	SDL_PollEvent(&event);
@@ -89,7 +87,6 @@ void Game::handleEvents()
 		player->handleEvents();
 		a = player->getVelX();
 	}
-	// cout << "Testing handleEvents" << endl;
 }
 
 inline double distanceSq(int x1, int y1, int x2, int y2)
@@ -119,23 +116,17 @@ void Game::update()
 			return;
 		for (int i = 0; i < 3; i++)
 		{
-			if (aliens[i] != NULL)
-			{
-				// cout << "Updating the alien with number " << i << aliens[i]->getY() << endl;
-				aliens[i]->update();
-			}
-			if (aliens[i] != NULL)
-			{
-				// cout << "Checking collision with alien " << i << endl;
-				isRunning = !(checkCollision(aliens[i], 2000));
-				if (AlienReachedEndpoint(aliens[i]))
-				{
-					aliens[i] = NULL;
-					// cout << "Alien has now become null " << i << endl;
-					cnt++;
-					// cout << "Count has incremented" << cnt << endl;
-				}
-			}
+			// if (aliens[i] != NULL)
+			// {
+			aliens[i]->update();
+			isRunning = !(checkCollision(aliens[i], 2000));
+			// if ((aliens[i])->AlienReachedEndpoint())
+			// {
+			// 	delete (aliens[i]);
+			// 	aliens[i] = NULL;
+			// 	cnt++;
+			// }
+			// }
 
 			if (!isRunning)
 				return;
@@ -152,22 +143,20 @@ void Game::render()
 	{
 		player->Render();
 	}
-	// cout << "Outside render for loop" << endl;
 	for (int i = 0; i < 3; i++)
 	{
-		// cout << "Checking alien renderer" << endl;
-		if (aliens[i] != NULL)
-			aliens[i]->Render();
+		// if (aliens[i] != NULL)
+		// cout << "Rendering alien" << endl;
+		aliens[i]->Render();
 	}
-	if (cnt == 3)
-	{
-		cnt = 0;
-		// cout << "Rendering new aliens" << endl;
-		for (int i = 0; i < 3; i++)
-		{
-			aliens[i] = new Alien("images/alien.png", rand() % 800, 0, 80, 80);
-		}
-	}
+	// if (cnt == 3)
+	// {
+	// 	cnt = 0;
+	// 	for (int i = 0; i < 3; i++)
+	// 	{
+	// 		aliens[i] = new Alien("images/monster.png", rand() % 800, 0, 80, 80);
+	// 	}
+	// }
 	obstacle->Render();
 	SDL_RenderPresent(renderer);
 }
