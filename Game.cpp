@@ -45,24 +45,15 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 
 		isRunning = true;
 	}
-	srand(time(0));
 	player = new Player("images/astronaut.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
 	background = new GameObject("images/space.jpg", 0, 0, 900, 900);
 	for (int i = 0; i < 3; i++)
 	{
-		aliens[i] = new Alien("images/alien.png", rand() % 800, 0, 80, 80);
+		aliens[i] = new Alien(Alien::images[rand()%3], rand() % 800, 0, 80, 80);
 	}
 }
 
-// bool AlienReachedEndpoint(Alien *alien)
-// {
-// 	if (alien->getY() >= 900)
-// 	{
-// 		return true;
-// 	}
-// 	return false;
-// }
 void Game::handleEvents()
 {
 	SDL_PollEvent(&event);
@@ -116,18 +107,8 @@ void Game::update()
 			return;
 		for (int i = 0; i < 3; i++)
 		{
-			// if (aliens[i] != NULL)
-			// {
 			aliens[i]->update();
 			isRunning = !(checkCollision(aliens[i], 2000));
-			// if ((aliens[i])->AlienReachedEndpoint())
-			// {
-			// 	delete (aliens[i]);
-			// 	aliens[i] = NULL;
-			// 	cnt++;
-			// }
-			// }
-
 			if (!isRunning)
 				return;
 		}
@@ -145,18 +126,8 @@ void Game::render()
 	}
 	for (int i = 0; i < 3; i++)
 	{
-		// if (aliens[i] != NULL)
-		// cout << "Rendering alien" << endl;
 		aliens[i]->Render();
 	}
-	// if (cnt == 3)
-	// {
-	// 	cnt = 0;
-	// 	for (int i = 0; i < 3; i++)
-	// 	{
-	// 		aliens[i] = new Alien("images/monster.png", rand() % 800, 0, 80, 80);
-	// 	}
-	// }
 	obstacle->Render();
 	SDL_RenderPresent(renderer);
 }

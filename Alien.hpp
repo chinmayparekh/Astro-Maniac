@@ -10,10 +10,12 @@ public:
     void update();
     bool AlienReachedEndpoint();
     void Render();
+    static const char *images[];
 
 private:
     int flag = 0;
     bool reachedEnd = false;
+    const char *picture;
     
 };
 

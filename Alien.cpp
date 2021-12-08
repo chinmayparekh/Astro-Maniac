@@ -20,6 +20,8 @@ bool Alien::AlienReachedEndpoint()
     return ypos >= 900;
 }
 
+const char * Alien::images[] = {"images/alien.png", "images/monster.png", "images/ufo.png"};
+
 void Alien::Render()
 {
     if (reachedEnd)
@@ -29,6 +31,7 @@ void Alien::Render()
         xpos = rand() % 800;
         ypos = 0;
         reachedEnd = false;
+        objTexture = TextureManager::LoadTexture(images[rand()%3]);
     }
 
     GameObject::Render();
