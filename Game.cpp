@@ -10,7 +10,7 @@ Obstacle *obstacle;
 GameObject *background;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
-Alien *aliens[2];
+Alien *aliens[3];
 using namespace std;
 
 int a = 0;
@@ -49,12 +49,22 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 	player = new Player("images/astronaut.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
 	background = new GameObject("images/space.jpg", 0, 0, 900, 900);
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		aliens[i] = new Alien("images/alien.png", rand() % 800, 0, 80, 80);
+		// cout << "Making alien" << endl;
 	}
 }
 
+bool AlienReachedEndpoint(Alien *alien)
+{
+	// cout << "Alien's y coordinate = " << alien->getY() << endl;
+	if (alien->getY() >= 900)
+	{
+		return true;
+	}
+	return false;
+}
 void Game::handleEvents()
 {
 	SDL_PollEvent(&event);
@@ -66,9 +76,9 @@ void Game::handleEvents()
 	case SDL_KEYDOWN:
 		switch (event.key.keysym.sym)
 		{
-			case SDLK_ESCAPE:
-					isRunning = false;
-					break;
+		case SDLK_ESCAPE:
+			isRunning = false;
+			break;
 		}
 		break;
 	default:
@@ -79,6 +89,7 @@ void Game::handleEvents()
 		player->handleEvents();
 		a = player->getVelX();
 	}
+	// cout << "Testing handleEvents" << endl;
 }
 
 inline double distanceSq(int x1, int y1, int x2, int y2)
@@ -97,7 +108,7 @@ bool checkCollision(GameObject *go, int dis)
 }
 void Game::update()
 {
-	if(!isRunning)
+	if (!isRunning)
 		return;
 	if (player != NULL)
 	{
@@ -106,10 +117,26 @@ void Game::update()
 		isRunning = !(checkCollision(obstacle, 10000));
 		if (!isRunning)
 			return;
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{
-			aliens[i]->update();
-			isRunning = !(checkCollision(aliens[i], 2000));
+			if (aliens[i] != NULL)
+			{
+				// cout << "Updating the alien with number " << i << aliens[i]->getY() << endl;
+				aliens[i]->update();
+			}
+			if (aliens[i] != NULL)
+			{
+				// cout << "Checking collision with alien " << i << endl;
+				isRunning = !(checkCollision(aliens[i], 2000));
+				if (AlienReachedEndpoint(aliens[i]))
+				{
+					aliens[i] = NULL;
+					// cout << "Alien has now become null " << i << endl;
+					cnt++;
+					// cout << "Count has incremented" << cnt << endl;
+				}
+			}
+
 			if (!isRunning)
 				return;
 		}
@@ -125,9 +152,21 @@ void Game::render()
 	{
 		player->Render();
 	}
-	for (int i = 0; i < 2; i++)
+	// cout << "Outside render for loop" << endl;
+	for (int i = 0; i < 3; i++)
 	{
-		aliens[i]->Render();
+		// cout << "Checking alien renderer" << endl;
+		if (aliens[i] != NULL)
+			aliens[i]->Render();
+	}
+	if (cnt == 3)
+	{
+		cnt = 0;
+		// cout << "Rendering new aliens" << endl;
+		for (int i = 0; i < 3; i++)
+		{
+			aliens[i] = new Alien("images/alien.png", rand() % 800, 0, 80, 80);
+		}
 	}
 	obstacle->Render();
 	SDL_RenderPresent(renderer);
