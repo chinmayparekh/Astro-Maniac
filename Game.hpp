@@ -2,8 +2,8 @@
 #define Game_hpp
 
 #include "GameObject.hpp"
-
 #include "main.hpp"
+using namespace std;
 class Game
 {
 public:
@@ -19,7 +19,13 @@ public:
     void clean();
     static SDL_Renderer *renderer;
     static SDL_Event event;
-    
+    static int randomNumberGenerator(int limit)
+    {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> dis(1, limit);
+        return dis(gen);
+    }
     // static bool isCollided;
     // static SDL_Event *event;
     // friend class TextureManager;

@@ -1,13 +1,28 @@
 #include "Alien.hpp"
 #include <time.h>
+#include "Game.hpp"
 #include <math.h>
 using namespace std;
-Alien::Alien(const char *texturesheet, int x, int y, int width, int height) : GameObject(texturesheet, x, y, width, height) {}
+Alien::Alien(const char *texturesheet, float x, float y, int width, int height, int index) : GameObject(texturesheet, x, y, width, height)
+{
+    this->index = index;
+}
 // Alien::~Alien() {}
 void Alien::update()
 {
-    xpos += 0;
-    ypos += 2;
+    switch (index)
+    {
+    case 0:
+        update1();
+        break;
+    case 1:
+        update2();
+        break;
+    case 2:
+        update3();
+        break;
+    }
+
     destRect.x = xpos;
     destRect.y = ypos;
     destRect.w = w;
@@ -15,12 +30,30 @@ void Alien::update()
     reachedEnd = AlienReachedEndpoint();
 }
 
+void Alien::update1()
+{
+    xpos += 5 * sin(ypos / 10);
+    ypos += 3;
+}
+
+void Alien::update2()
+{
+    xpos -= (1 + 4 * sin(ypos / 10));
+    ypos += 5;
+}
+
+void Alien::update3()
+{
+    xpos += 0;
+    ypos += 2;
+}
+
 bool Alien::AlienReachedEndpoint()
 {
     return ypos >= 900;
 }
 
-const char * Alien::images[] = {"images/alien.png", "images/monster.png", "images/ufo.png"};
+const char *Alien::images[] = {"images/alien.png", "images/monster.png", "images/ufo.png"};
 
 void Alien::Render()
 {
@@ -28,10 +61,12 @@ void Alien::Render()
     {
         // cout << "Rendering new alien" << endl;
         // srand(time(0));
-        xpos = rand() % 800;
+        xpos = Game::randomNumberGenerator(9619) % 800;
         ypos = 0;
         reachedEnd = false;
-        objTexture = TextureManager::LoadTexture(images[rand()%3]);
+        // srand(time(0));
+        index = Game::randomNumberGenerator(46578) % 3;
+        objTexture = TextureManager::LoadTexture(images[index]);
     }
 
     GameObject::Render();

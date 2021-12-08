@@ -2,6 +2,6 @@
 #define main_hpp
 #include "SDL2/SDL.h"
 #include <SDL2/SDL_image.h>
-#include <iostream>
+#include <bits/stdc++.h>
 
 #endif //MAIN_HPP

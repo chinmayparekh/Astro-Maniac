@@ -1,7 +1,7 @@
 #include "Player.hpp"
 #include "Game.hpp"
 
-Player::Player(const char *texturesheet, int x, int y, int width, int height) : GameObject(texturesheet, x, y, width, height) {}
+Player::Player(const char *texturesheet, float x, float y, int width, int height) : GameObject(texturesheet, x, y, width, height) {}
 
 void Player::handleEvents()
 {
@@ -10,13 +10,27 @@ void Player::handleEvents()
         move = 0;
         switch (Game::event.key.keysym.sym)
         {
-        case SDLK_a:
-            vel_X = 5;
-            dir = 2;
+        case SDLK_a: //going right
+            if (getX() > 745)
+            {
+                vel_X = 0;
+            }
+            else
+            {
+                vel_X = 5;
+                dir = 2;
+            }
             break;
         case SDLK_d:
-            vel_X = -5;
-            dir = 1;
+            if (getX() < 0)
+            {
+                vel_X = 0;
+            }
+            else
+            {
+                vel_X = -5;
+                dir = 1;
+            }
             break;
         }
     }

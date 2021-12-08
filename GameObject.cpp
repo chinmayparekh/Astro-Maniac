@@ -1,6 +1,6 @@
 #include "GameObject.hpp"
 
-GameObject::GameObject(const char *texturesheet, int x, int y, int width, int height)
+GameObject::GameObject(const char *texturesheet, float x, float y, int width, int height)
 {
     objTexture = TextureManager::LoadTexture(texturesheet);
     xpos = x;
@@ -16,7 +16,7 @@ GameObject::GameObject(const char *texturesheet, int x, int y, int width, int he
 //     destRect.w = w;
 //     destRect.h = h;
 // }
-void GameObject::update(int p, int q)
+void GameObject::update(float p, float q)
 {
     xpos += p;
     ypos += q;
