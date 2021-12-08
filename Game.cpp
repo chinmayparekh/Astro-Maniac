@@ -2,16 +2,20 @@
 #include "Player.hpp"
 #include "Alien.hpp"
 #include "Obstacle.hpp"
+#include "Fuel.hpp"
 #include <bits/stdc++.h>
 #include <time.h>
 
 Player *player;
 Obstacle *obstacle;
+Fuel* fuel;
 GameObject *background;
+
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 Alien *aliens[3];
 using namespace std;
+bool isFuel =false;
 
 int a = 0;
 bool collision = false;
@@ -47,7 +51,9 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 	}
 	player = new Player("images/astronaut.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
+	fuel = new Fuel("images/fuel.jpg", 430, 0, 80, 80);
 	background = new GameObject("images/space.png", 0, 0, 900, 900);
+
 	for (int i = 0; i < 3; i++)
 	{
 		int ranIndex = randomNumberGenerator(123456)%3;
@@ -95,25 +101,31 @@ bool checkCollision(GameObject *go, float dis)
 	}
 	return false;
 }
+
+bool isDead()
+{
+	if(checkCollision(obstacle, 10000))
+		return false;
+	for (int i = 0; i < 3; i++)
+	{
+		if (checkCollision(aliens[i], 2000))
+			return false;
+	}
+	return true;
+}
+
 void Game::update()
 {
-	if (!isRunning)
+	if(!isRunning)
 		return;
 	if (player != NULL)
 	{
 		player->update(a, 0);
 		obstacle->update(-2, 2);
-		isRunning = !(checkCollision(obstacle, 10000));
-		if (!isRunning)
-			return;
 		for (int i = 0; i < 3; i++)
-		{
 			aliens[i]->update();
-			isRunning = !(checkCollision(aliens[i], 2000));
-			if (!isRunning)
-				return;
-		}
 	}
+	isRunning = isDead();
 	background->update(0, 0);
 }
 
