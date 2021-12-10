@@ -6,7 +6,6 @@ class Alien : public GameObject
 {
 public:
     Alien(const char *texturesheet, float x, float y, int width, int height, int index);
-    // ~Alien();
     void update();
     void update1();
     void update2();
@@ -20,7 +19,6 @@ private:
     bool reachedEnd = false;
     const char *picture;
     int index;
-    
 };
 
 #endif

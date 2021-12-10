@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     int frameTime;
 
     game = new Game();
-    game->init("GameWindow", 900, 900, false);
+    game->init("Astro Maniac ", 900, 900, false);
 
     while (game->running())
     {
@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
         game->handleEvents();
         game->update();
         game->render();
-
         frameTime = SDL_GetTicks() - frameStart;
 
         if (frameDelay > frameTime)

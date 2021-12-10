@@ -8,15 +8,14 @@
 
 Player *player;
 Obstacle *obstacle;
-Fuel* fuel;
+Fuel *fuel;
 GameObject *background;
 
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 Alien *aliens[3];
 using namespace std;
-bool isFuel =false;
-
+bool fuelCollected = false;
 int a = 0;
 bool collision = false;
 
@@ -56,7 +55,7 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 
 	for (int i = 0; i < 3; i++)
 	{
-		int ranIndex = randomNumberGenerator(123456)%3;
+		int ranIndex = randomNumberGenerator(123456) % 3;
 		aliens[i] = new Alien(Alien::images[ranIndex], rand() % 800, 0, 80, 80, ranIndex);
 	}
 }
@@ -104,19 +103,23 @@ bool checkCollision(GameObject *go, float dis)
 
 bool isDead()
 {
-	if(checkCollision(obstacle, 10000))
+	if (checkCollision(obstacle, 10000))
 		return false;
 	for (int i = 0; i < 3; i++)
 	{
 		if (checkCollision(aliens[i], 2000))
 			return false;
 	}
+	if (fuel->getPlayerStatus())
+	{
+		return false;
+	}
 	return true;
 }
 
 void Game::update()
 {
-	if(!isRunning)
+	if (!isRunning)
 		return;
 	if (player != NULL)
 	{
@@ -125,23 +128,29 @@ void Game::update()
 		for (int i = 0; i < 3; i++)
 			aliens[i]->update();
 	}
-	isRunning = isDead();
+	fuel->update(player);
 	background->update(0, 0);
+	//put isRunnig at the end
+	isRunning = isDead();
 }
 
 void Game::render()
 {
+	//sdl render clear always first
 	SDL_RenderClear(renderer);
 	background->Render();
 	if (player != NULL)
 	{
 		player->Render();
+		for (int i = 0; i < 3; i++)
+		{
+			aliens[i]->Render();
+		}
+		obstacle->Render();
+		fuel->Render();
 	}
-	for (int i = 0; i < 3; i++)
-	{
-		aliens[i]->Render();
-	}
-	obstacle->Render();
+
+	//sdl render present at end
 	SDL_RenderPresent(renderer);
 }
 

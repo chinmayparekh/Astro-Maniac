@@ -14,8 +14,8 @@ public:
     void Render();
     float getX() { return xpos; }
     float getY() { return ypos; }
-    void setX(float x){xpos = x;}
-    void setY(float y){ypos = y;}
+    void setX(float x) { xpos = x; }
+    void setY(float y) { ypos = y; }
     int getHeight() { return h; }
     int getWidth() { return w; }
     void handleEvents();
