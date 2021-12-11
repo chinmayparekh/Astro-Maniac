@@ -4,6 +4,7 @@
 #include "Obstacle.hpp"
 #include "Fuel.hpp"
 #include "Score.hpp"
+#include "Background.hpp"
 #include <bits/stdc++.h>
 #include <time.h>
 #include <SDL2/SDL_ttf.h>
@@ -11,7 +12,8 @@
 Player *player;
 Obstacle *obstacle;
 Fuel *fuel;
-GameObject *background;
+Background *background1;
+Background *background2;
 
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -60,7 +62,8 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 	player = new Player("images/astronaut.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
 	fuel = new Fuel("images/fuel.jpg", 430, 0, 80, 80);
-	background = new GameObject("images/space.png", 0, 0, 900, 900);
+	background1 = new Background("images/space.png", 0, 0, 900, 900);
+	background2 = new Background("images/space.png", 0, -900, 900, 900);
 	score = new Score();
 
 	for (int i = 0; i < 3; i++)
@@ -139,7 +142,8 @@ void Game::update()
 			aliens[i]->update();
 	}
 	fuel->update(player);
-	background->update(0, 0);
+	background1->update();
+	background2->update();
 	//put isRunnig at the end
 	isRunning = isDead();
 }
@@ -149,7 +153,8 @@ void Game::render()
 	sb++;
 	//sdl render clear always first
 	SDL_RenderClear(renderer);
-	background->Render();
+	background1->Render();
+	background2->Render();
 	if (player != NULL)
 	{
 		player->Render();
