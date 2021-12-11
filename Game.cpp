@@ -3,8 +3,10 @@
 #include "Alien.hpp"
 #include "Obstacle.hpp"
 #include "Fuel.hpp"
+#include "Score.hpp"
 #include <bits/stdc++.h>
 #include <time.h>
+#include <SDL2/SDL_ttf.h>
 
 Player *player;
 Obstacle *obstacle;
@@ -14,6 +16,12 @@ GameObject *background;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 Alien *aliens[3];
+
+SDL_Rect rec;
+SDL_Texture *tx;
+Score *score = NULL;
+int sb = 0;
+
 using namespace std;
 bool fuelCollected = false;
 int a = 0;
@@ -47,11 +55,13 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 		}
 
 		isRunning = true;
+		TTF_Init();
 	}
 	player = new Player("images/astronaut.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
 	fuel = new Fuel("images/fuel.jpg", 430, 0, 80, 80);
 	background = new GameObject("images/space.png", 0, 0, 900, 900);
+	score = new Score();
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -136,6 +146,7 @@ void Game::update()
 
 void Game::render()
 {
+	sb++;
 	//sdl render clear always first
 	SDL_RenderClear(renderer);
 	background->Render();
@@ -149,6 +160,8 @@ void Game::render()
 		obstacle->Render();
 		fuel->Render();
 	}
+	score->update(sb);
+
 
 	//sdl render present at end
 	SDL_RenderPresent(renderer);
