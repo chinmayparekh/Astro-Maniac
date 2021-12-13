@@ -19,6 +19,8 @@ public:
     int getHeight() { return h; }
     int getWidth() { return w; }
     void handleEvents();
+    SDL_Rect *getSrcRect() { return &srcRect; }
+    SDL_Rect *getdestRect() { return &destRect; }
 
 protected:
     float xpos;

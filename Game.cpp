@@ -99,28 +99,21 @@ void Game::handleEvents()
 	}
 }
 
-inline double distanceSq(float x1, float y1, float x2, float y2)
+bool IntersectRect(SDL_Rect *r1, SDL_Rect *r2) //checking collision
 {
-	return ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-}
-
-bool checkCollision(GameObject *go, float dis)
-{
-	if ((distanceSq(go->getX(), go->getY(), player->getX(), player->getY()) < dis)) //checking collision
-	{
-		player = NULL;
-		return true;
-	}
-	return false;
+	return !(r2->x > (r1->x + r1->w / 2) ||
+			 (r2->x + r2->w / 2) < r1->x ||
+			 r2->y > (r1->y + r1->h / 2) ||
+			 (r2->y + r2->h / 2) < r1->y);
 }
 
 bool isDead()
 {
-	if (checkCollision(obstacle, 10000))
+	if (IntersectRect(obstacle->getdestRect(), player->getdestRect()))
 		return false;
 	for (int i = 0; i < 3; i++)
 	{
-		if (checkCollision(aliens[i], 2000))
+		if (IntersectRect(aliens[i]->getdestRect(), player->getdestRect()))
 			return false;
 	}
 	if (fuel->getPlayerStatus())
@@ -166,7 +159,6 @@ void Game::render()
 		fuel->Render();
 	}
 	score->update(sb);
-
 
 	//sdl render present at end
 	SDL_RenderPresent(renderer);
