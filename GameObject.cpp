@@ -28,5 +28,6 @@ void GameObject::update(float p, float q)
 
 void GameObject::Render()
 {
+    // SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
     SDL_RenderCopy(Game::renderer, objTexture, NULL, &destRect);
 }

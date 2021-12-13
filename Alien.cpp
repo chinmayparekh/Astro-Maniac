@@ -8,6 +8,17 @@ Alien::Alien(const char *texturesheet, float x, float y, int width, int height, 
     this->index = index;
 }
 // Alien::~Alien() {}
+
+int ufo[][4] = {
+    //x y width and height
+    {30, 0, 210, 110},
+    {255, 0, 210, 110},
+    {520, 0, 210, 110},
+    {785, 0, 210, 110},
+    {1035, 0, 210, 110},
+    {1290, 0, 210, 110},
+    {1535, 0, 210, 110},
+};
 void Alien::update()
 {
     switch (index)

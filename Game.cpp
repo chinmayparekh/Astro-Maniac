@@ -59,7 +59,7 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 		isRunning = true;
 		TTF_Init();
 	}
-	player = new Player("images/astronaut.png", 430, 710, 170, 170);
+	player = new Player("images/rocket.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
 	fuel = new Fuel("images/fuel.jpg", 430, 0, 80, 80);
 	background1 = new Background("images/space.png", 0, 0, 900, 900);
@@ -94,7 +94,7 @@ void Game::handleEvents()
 	}
 	if (player != NULL)
 	{
-		player->handleEvents();
+		player->handleEvents2();
 		a = player->getVelX();
 	}
 }
@@ -157,7 +157,7 @@ void Game::render()
 	background2->Render();
 	if (player != NULL)
 	{
-		player->Render();
+		player->Render2();
 		for (int i = 0; i < 3; i++)
 		{
 			aliens[i]->Render();
