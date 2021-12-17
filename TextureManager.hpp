@@ -1,6 +1,6 @@
 #ifndef TextureManager_hpp
 #define TextureManager_hpp
-#include "Game.hpp"
+#include "Window.hpp"
 class TextureManager
 {
 public:

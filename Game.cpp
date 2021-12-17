@@ -15,8 +15,8 @@ Fuel *fuel;
 Background *background1;
 Background *background2;
 
-SDL_Renderer *Game::renderer = nullptr;
-SDL_Event Game::event;
+SDL_Renderer *Window::renderer = nullptr;
+SDL_Event Window::event;
 Alien *aliens[3];
 
 SDL_Rect rec;
@@ -39,26 +39,7 @@ Game::~Game()
 
 void Game::init(const char *title, int width, int height, bool fullscreen)
 {
-	int flags = 0;
-
-	if (fullscreen)
-	{
-		flags = SDL_WINDOW_FULLSCREEN;
-	}
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
-	{
-		window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
-
-		renderer = SDL_CreateRenderer(window, -1, 0);
-		if (renderer)
-		{
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		}
-
-		isRunning = true;
-		TTF_Init();
-	}
+	Window::init(title, width, height, fullscreen);
 	player = new Player("images/rocket.png", 430, 710, 170, 170);
 	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
 	fuel = new Fuel("images/fuel.jpg", 430, 0, 80, 80);
@@ -75,26 +56,10 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 
 void Game::handleEvents()
 {
-	SDL_PollEvent(&event);
-	switch (event.type)
-	{
-	case SDL_QUIT:
-		isRunning = false;
-		break;
-	case SDL_KEYDOWN:
-		switch (event.key.keysym.sym)
-		{
-		case SDLK_ESCAPE:
-			isRunning = false;
-			break;
-		}
-		break;
-	default:
-		break;
-	}
+	Window::handleEvents();
 	if (player != NULL)
 	{
-		player->handleEvents2();
+		player->handleEvents();
 		a = player->getVelX();
 	}
 }
@@ -125,8 +90,10 @@ bool isDead()
 
 void Game::update()
 {
-	if (!isRunning)
+	if(!isRunning)
 		return;
+	Window::update();
+
 	if (player != NULL)
 	{
 		player->update(a, 0);
@@ -135,22 +102,19 @@ void Game::update()
 			aliens[i]->update();
 	}
 	fuel->update(player);
-	background1->update();
-	background2->update();
-	//put isRunnig at the end
+	//put isRunning at the end
 	isRunning = isDead();
 }
 
-void Game::render()
+void Game::renderNew()
 {
+	if(!isRunning)
+		return;
 	sb++;
 	//sdl render clear always first
-	SDL_RenderClear(renderer);
-	background1->Render();
-	background2->Render();
 	if (player != NULL)
 	{
-		player->Render2();
+		player->Render();
 		for (int i = 0; i < 3; i++)
 		{
 			aliens[i]->Render();
@@ -161,12 +125,4 @@ void Game::render()
 	score->update(sb);
 
 	//sdl render present at end
-	SDL_RenderPresent(renderer);
-}
-
-void Game::clean()
-{
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
-	SDL_Quit();
 }

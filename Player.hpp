@@ -10,11 +10,11 @@ public:
 
     int getVelX() { return vel_X; }
     int getVelY() { return vel_Y; }
+    // void handleEvents();
     void handleEvents();
-    void handleEvents2();
-    void Animate();
-    void Animate2(int i, int dir);
-    void Render2();
+    // void Animate();
+    void Animate(int i, int dir);
+    void Render();
     bool isMoving() { return moving; }
     int getDirection() { return dir; }
     int getMove() { return move; }
@@ -23,7 +23,7 @@ private:
     int vel_X;
     int vel_Y;
     bool moving;
-    int move;
+    int move ;
     int dir;
 };
 

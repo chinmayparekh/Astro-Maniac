@@ -1,7 +1,7 @@
 #ifndef GameObject_hpp
 #define GameObject_hpp
 
-#include "Game.hpp"
+#include "Window.hpp"
 #include "main.hpp"
 #include "TextureManager.hpp"
 class GameObject
