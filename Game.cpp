@@ -122,7 +122,7 @@ void Game::renderNew()
 		obstacle->Render();
 		fuel->Render();
 	}
-	score->update(sb);
+	score->render(sb);
 
 	//sdl render present at end
 }

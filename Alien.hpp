@@ -12,6 +12,7 @@ public:
     void update3();
     bool AlienReachedEndpoint();
     void Render();
+    void Animate(int i);
     static const char *images[];
 
 private:
@@ -19,6 +20,8 @@ private:
     bool reachedEnd = false;
     const char *picture;
     int index;
+    int c = 0;
+    int im;
 };
 
 #endif
