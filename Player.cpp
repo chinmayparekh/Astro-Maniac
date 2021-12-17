@@ -58,8 +58,10 @@ void Player::handleEvents()
 void Player::Animate()
 {
     move++;
+    cout << move << endl;
     if ((vel_X > 0 || move < 30) && dir == 2)
     {
+        cout << move << endl;
         moving = true;
         if (move < 6)
             objTexture = SDL_CreateTextureFromSurface(Game::renderer, IMG_Load("images/right0.png"));
@@ -139,36 +141,42 @@ void Player::handleEvents2()
 
 void Player::Render2()
 {
-    move++;
-    if ((vel_X > 0 || move < 35) && dir == 2)
+    //cout << move << endl;
+    if ((vel_X > 0 || move < 30) && dir == 2)
     {
+        move++;
         moving = true;
         int cf;
+        //cout << move << endl;
         // if(move < 5)
         //     cf = 4 + (SDL_GetTicks() * 12 / 1000) % 4;
         // else 
         //     cf = 8 - (SDL_GetTicks() * 12 / 1000) % 4;
         
-        if (move < 5)
-            cf = 5;
-        else if (move < 10)
-            cf = 6;
-        else if (move < 15)
-            cf = 7;
-        else if (move < 20)
+        if (move < 3)
             cf = 8;
-        else if (move < 25)
+        else if (move < 6)
             cf = 7;
-        else if (move < 30)
+        else if (move < 9)
             cf = 6;
-        else
+        else if (move < 12)
             cf = 5;
+        //  else if (move < 25)
+        //     cf = 6;
+        // else if (move < 30)
+        //     cf = 7;
+        // else
+        //     cf = 5;
+        else
+            cf = 4;
         Animate2(cf, dir);
     }
-    else if ((vel_X < 0 || move < 35) && dir == 1)
+    else if ((vel_X < 0 || move > -30) && dir == 1)
     {
+        move--;
         moving = true;
         int cf;
+        //cout << move << endl;
         // if(move < 5)
         //     cf = 4 - (SDL_GetTicks() * 12 / 1000) % 4;
         // else 
@@ -192,20 +200,22 @@ void Player::Render2()
         //     Animate2(2, dir);
         // else
         //     Animate2(1, dir);
-        if (move < 5)
-            cf = 3;
-        else if (move < 10)
-            cf = 2;
-        else if (move < 15)
-            cf = 1;
-        else if (move < 20)
+        if (move > -3)
             cf = 0;
-        else if (move < 25)
+        else if (move > -6)
             cf = 1;
-        else if (move < 30)
+        else if (move > -9)
             cf = 2;
-        else
+        else if (move > -12)
             cf = 3;
+        // else if (move < 25)
+        //     cf = 1;
+        // else if (move < 30)
+        //     cf = 2;
+        // else
+        //     cf = 3;
+        else
+            cf = 4;
         Animate2(cf, dir);
     }
     else if (moving)

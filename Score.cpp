@@ -28,7 +28,7 @@ Score::Score()
     TTF_Init();
 }
 
-void Score::update(int cnt)
+void Score::render(int cnt)
 {
 
 	int time = cnt/10;

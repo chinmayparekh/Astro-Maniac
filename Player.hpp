@@ -23,7 +23,7 @@ private:
     int vel_X;
     int vel_Y;
     bool moving;
-    int move;
+    int move ;
     int dir;
 };
 

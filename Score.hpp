@@ -12,5 +12,5 @@ class Score
         
     public:
         Score();
-        void update(int cnt);
+        void render(int cnt);
 };
