@@ -1,6 +1,4 @@
 #include "Game.hpp"
-
-
 class Score 
 {
     private:
