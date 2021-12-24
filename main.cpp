@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include <fstream>
 #include <string>
-Window *game = nullptr;
+Game *game = nullptr;
 vector<int> scores;
 void fileWrite(fstream &filepointer, int scoreKeeper)
 {
@@ -9,7 +9,7 @@ void fileWrite(fstream &filepointer, int scoreKeeper)
     sort(scores.begin(), scores.end());
     for (int i = 0; i < scores.size(); i++)
     {
-        (filepointer) << "Score = " << scores[i] << endl;
+        (filepointer) << "Score = " << scores[scores.size() - 1 - i] << endl;
     }
 }
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     fileRead(file_input);
 
     Window *win = new Window();
-    win->init("First Window ", 900, 900, false);
+    win->init("First Window ", WINDOW_W, WINDOW_H, false);
     while (win->running())
     {
         frameStart = SDL_GetTicks();
@@ -51,9 +51,14 @@ int main(int argc, char *argv[])
             SDL_Delay(frameDelay - frameTime);
         }
     }
+    int hScore;
+    if(scores.size())
+        hScore = scores[0];
+    else
+        hScore = 0;
 
     game = new Game();
-    game->init("Astro Maniac ", 900, 900, false);
+    game->init("Astro Maniac ", WINDOW_W, WINDOW_H, false, hScore);
     while (game->running())
     {
         scoreKeeper++;

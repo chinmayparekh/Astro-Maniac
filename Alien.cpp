@@ -1,6 +1,7 @@
 #include "Alien.hpp"
-#include <time.h>
+#include "main.hpp"
 #include "Game.hpp"
+#include <time.h>
 #include <math.h>
 using namespace std;
 Alien::Alien(const char *texturesheet, float x, float y, int width, int height, int index) : GameObject(texturesheet, x, y, width, height)
@@ -61,7 +62,12 @@ void Alien::update3()
 
 bool Alien::AlienReachedEndpoint()
 {
-    return ypos >= 900;
+    if(index == 1)
+        return ypos >= WINDOW_H*3/2;
+    else if(index == 2)
+        return ypos >= WINDOW_H*5/4;
+    else
+        return ypos >= WINDOW_H;
 }
 
 const char *Alien::images[] = {"images/alien.png", "images/monster.png", "images/ufo.png"};
@@ -123,7 +129,7 @@ void Alien::Render()
         {
             // cout << "Rendering new alien" << endl;
             // srand(time(0));
-            xpos = Game::randomNumberGenerator(9619) % 800;
+            xpos = Game::randomNumberGenerator(9619) % (WINDOW_W * 800 / 900);
             ypos = 0;
             reachedEnd = false;
             // srand(time(0));

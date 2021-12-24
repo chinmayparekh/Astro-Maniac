@@ -20,13 +20,13 @@ void Fuel::update(Player *player)
 {
     if (tookFuel(player, 5000))
     {
-        xpos = Game::randomNumberGenerator(2543) % 800;
+        xpos = Game::randomNumberGenerator(2543) % (WINDOW_W * 800 / 900);
         ypos = 0;
         count = 0;
     }
-    else if (ypos > 830)
+    else if (ypos > WINDOW_H * 830 / 900)
     {
-        xpos = Game::randomNumberGenerator(2543) % 800;
+        xpos = Game::randomNumberGenerator(2543) % (WINDOW_W * 800 / 900);
         ypos = 0;
         count++;
         if (count == 3)

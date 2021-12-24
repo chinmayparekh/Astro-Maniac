@@ -8,6 +8,7 @@
 #include <bits/stdc++.h>
 #include <time.h>
 #include <SDL2/SDL_ttf.h>
+#include "main.hpp"
 
 Player *player;
 Obstacle *obstacle;
@@ -37,20 +38,21 @@ Game::~Game()
 {
 }
 
-void Game::init(const char *title, int width, int height, bool fullscreen)
+void Game::init(const char *title, int width, int height, bool fullscreen, int highScore)
 {
 	Window::init(title, width, height, fullscreen);
-	player = new Player("images/rocket.png", 430, 710, 170, 170);
-	obstacle = new Obstacle("images/meteor.png", 850, 400, 80, 80);
-	fuel = new Fuel("images/fuel.jpg", 430, 0, 80, 80);
-	background1 = new Background("images/space.png", 0, 0, 900, 900);
-	background2 = new Background("images/space.png", 0, -900, 900, 900);
+	this->highScore = highScore;
+	player = new Player("images/rocket.png", WINDOW_W * 430 / 900, WINDOW_H * 710 / 900, 170 * WINDOW_W / 900, 170 * WINDOW_H / 900);
+	obstacle = new Obstacle("images/meteor.png", WINDOW_W * 850 / 900, WINDOW_H * 400 / 900, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
+	fuel = new Fuel("images/fuel.jpg", WINDOW_W * 430 / 900, 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
+	background1 = new Background("images/space.png", WINDOW_W * 0,  0, WINDOW_W, WINDOW_H);
+	background2 = new Background("images/space.png", WINDOW_W * 0,  -WINDOW_H, WINDOW_W, WINDOW_H);
 	score = new Score();
 
 	for (int i = 0; i < 3; i++)
 	{
 		int ranIndex = randomNumberGenerator(123456) % 3;
-		aliens[i] = new Alien(Alien::images[ranIndex], rand() % 800, 0, 80, 80, ranIndex);
+		aliens[i] = new Alien(Alien::images[ranIndex], rand() % (WINDOW_W * 800 / 900), 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900, ranIndex);
 	}
 }
 
@@ -66,10 +68,7 @@ void Game::handleEvents()
 
 bool IntersectRect(SDL_Rect *r1, SDL_Rect *r2) //checking collision
 {
-	return !(r2->x > (r1->x + r1->w / 2) ||
-			 (r2->x + r2->w / 2) < r1->x ||
-			 r2->y > (r1->y + r1->h / 2) ||
-			 (r2->y + r2->h / 2) < r1->y);
+	return !(r2->x > (r1->x + r1->w / 2) || (r2->x + r2->w / 2) < r1->x || r2->y > (r1->y + r1->h / 2) || (r2->y + r2->h / 2) < r1->y);
 }
 
 bool isDead()
@@ -122,7 +121,7 @@ void Game::renderNew()
 		obstacle->Render();
 		fuel->Render();
 	}
-	score->render(sb);
+	score->render(sb, this->highScore);
 
 	//sdl render present at end
 }

@@ -28,7 +28,7 @@ Score::Score()
     TTF_Init();
 }
 
-void Score::render(int cnt)
+void Score::render(int cnt, int highScore)
 {
 
 	int time = cnt/10;
@@ -40,10 +40,15 @@ void Score::render(int cnt)
 		exit(EXIT_FAILURE);
         // return;
 	}
+	std::string hs;
+	if(highScore < time)
+		hs = "High Score: " + std::to_string(time);
+	else
+		hs = "High Score: " + std::to_string(highScore);
         
 	get_text_and_rect(Game::renderer, 0, 0, tmp.c_str(), font1, &tx, &r);
     SDL_RenderCopy(Game::renderer, tx, NULL, &r);
-	get_text_and_rect(Game::renderer, 650, 0, "High Score: 0", font1, &tx1, &r1);
+	get_text_and_rect(Game::renderer, WINDOW_W * 650/900, 0, hs.c_str(), font1, &tx1, &r1);
     SDL_RenderCopy(Game::renderer, tx1, NULL, &r1);
     
 }
