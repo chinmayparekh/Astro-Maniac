@@ -12,13 +12,13 @@ Alien::Alien(const char *texturesheet, float x, float y, int width, int height, 
 
 int ufo[][4] = {
     //x y width and height
-    {30, 0, 210, 110},
-    {255, 0, 210, 110},
-    {520, 0, 210, 110},
-    {785, 0, 210, 110},
-    {1035, 0, 210, 110},
-    {1290, 0, 210, 110},
-    {1535, 0, 210, 110},
+    {0, 6, 210, 90},
+    {261, 6, 214, 90},
+    {521, 6, 213, 90},
+    {785, 6, 214, 90},
+    {1036, 6, 213, 90},
+    {1291, 6, 212, 90},
+    {1537, 6, 212, 90},
 };
 void Alien::update()
 {
@@ -70,11 +70,11 @@ bool Alien::AlienReachedEndpoint()
         return ypos >= WINDOW_H;
 }
 
-const char *Alien::images[] = {"images/alien.png", "images/monster.png", "images/ufo.png"};
+const char *Alien::images[] = {"images/alien.png", "images/monster.png", "images/ufoSprites.png"};
 
 void Alien::Render()
 {
-    /*if(index == 2)
+    if(index == 2)
     {
         c+=1;
         c = c%28;
@@ -106,44 +106,29 @@ void Alien::Render()
         {
             im = 6;
         }
-
-        if (reachedEnd)
-        {
-            // cout << "Rendering new alien" << endl;
-            // srand(time(0));
-            xpos = Game::randomNumberGenerator(9619) % 800;
-            ypos = 0;
-            reachedEnd = false;
-            // srand(time(0));
-            index = Game::randomNumberGenerator(46578) % 3;
-            objTexture = TextureManager::LoadTexture(images[index]);
-        }
-
         Animate(im);
         //GameObject::Render();
-
-    }*/
-    //else
-    //{
-        if (reachedEnd)
-        {
-            // cout << "Rendering new alien" << endl;
-            // srand(time(0));
-            xpos = Game::randomNumberGenerator(9619) % (WINDOW_W * 800 / 900);
-            ypos = 0;
-            reachedEnd = false;
-            // srand(time(0));
-            index = Game::randomNumberGenerator(46578) % 3;
-            objTexture = TextureManager::LoadTexture(images[index]);
-        }
-
+    }
+    else
+    {
         GameObject::Render();
+    }
 
-    //}
+    if (reachedEnd)
+    {
+        // cout << "Rendering new alien" << endl;
+        // srand(time(0));
+        xpos = Game::randomNumberGenerator(9619) % (WINDOW_W * 800 / 900);
+        ypos = 0;
+        reachedEnd = false;
+        // srand(time(0));
+        index = Game::randomNumberGenerator(46578) % 3;
+        objTexture = TextureManager::LoadTexture(images[index]);
+    }
     
 }
 
-/*void Alien::Animate(int i)
+void Alien::Animate(int i)
 {
     srcRect.x = ufo[i][0];
     srcRect.y = ufo[i][1];
@@ -153,4 +138,4 @@ void Alien::Render()
     SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
     // else
     //     SDL_RenderCopyEx(Game::renderer, objTexture, &srcRect, &destRect, 0, NULL, SDL_FLIP_HORIZONTAL);
-}*/
+}
