@@ -8,6 +8,13 @@ Alien::Alien(const char *texturesheet, float x, float y, int width, int height, 
 {
     this->index = index;
 }
+
+Alien::Alien(const char *texturesheet, int index) : GameObject(texturesheet, 0, 0, 0, 0)
+{
+    this->index = index;
+    setPosition();
+}
+int Alien::spawnRegion = 1;
 // Alien::~Alien() {}
 
 int ufo[][4] = {
@@ -25,36 +32,36 @@ void Alien::update()
     switch (index)
     {
     case 0:
-        update1();
+        update0();
         break;
     case 1:
-        update2();
+        update1();
         break;
     case 2:
-        update3();
+        update2();
         break;
     }
 
     destRect.x = xpos;
     destRect.y = ypos;
-    destRect.w = w;
-    destRect.h = h;
+    // destRect.w = w;
+    // destRect.h = h;
     reachedEnd = AlienReachedEndpoint();
 }
 
-void Alien::update1()
+void Alien::update0()
 {
     xpos += 5 * sin(ypos / 10);
     ypos += 3;
 }
 
-void Alien::update2()
+void Alien::update1()
 {
     xpos -= (1 + 4 * sin(ypos / 10));
     ypos += 5;
 }
 
-void Alien::update3()
+void Alien::update2()
 {
     xpos += 0;
     ypos += 2;
@@ -76,7 +83,7 @@ void Alien::Render()
 {
     if(index == 2)
     {
-        c+=1;
+        c += 1;
         c = c%28;
         if(c < 4)
         {
@@ -118,12 +125,11 @@ void Alien::Render()
     {
         // cout << "Rendering new alien" << endl;
         // srand(time(0));
-        xpos = Game::randomNumberGenerator(9619) % (WINDOW_W * 800 / 900);
-        ypos = 0;
-        reachedEnd = false;
-        // srand(time(0));
         index = Game::randomNumberGenerator(46578) % 3;
         objTexture = TextureManager::LoadTexture(images[index]);
+        setPosition();
+        reachedEnd = false;
+        // srand(time(0));
     }
     
 }
@@ -132,10 +138,43 @@ void Alien::Animate(int i)
 {
     srcRect.x = ufo[i][0];
     srcRect.y = ufo[i][1];
-    destRect.w = srcRect.w = ufo[i][2];
-    destRect.h = srcRect.h = ufo[i][3];
+    srcRect.w = ufo[i][2];
+    srcRect.h = ufo[i][3];
+    destRect.w = wa2;
+    destRect.h = ha2;
+
     // if (dir <= 1)
     SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
     // else
     //     SDL_RenderCopyEx(Game::renderer, objTexture, &srcRect, &destRect, 0, NULL, SDL_FLIP_HORIZONTAL);
+}
+
+void Alien::setPosition()
+{
+    switch (index)
+    {
+    case 0:
+        w = wa0;
+        h = ha0;
+        break;
+    case 1:
+        w = wa1;
+        h = ha1;
+        break;
+    case 2:
+        w = wa2;
+        h = ha2;        
+        break;
+    }
+    xpos = Game::randomNumberGenerator((WINDOW_W - 5 * w) * 1000) * 1.0 / 1000;
+    xpos = (spawnRegion * WINDOW_W * 1.0)/3 + xpos / 3;
+    // if(spawnRegion == 2)
+    //     xpos -= w;
+    ypos = 0;
+    spawnRegion = (spawnRegion + 2)%3;
+    destRect.x = xpos;
+    destRect.y = ypos;
+    destRect.w = w;
+    destRect.h = h;
+    reachedEnd = AlienReachedEndpoint();
 }

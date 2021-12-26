@@ -52,7 +52,8 @@ void Game::init(const char *title, int width, int height, bool fullscreen, int h
 	for (int i = 0; i < 3; i++)
 	{
 		int ranIndex = randomNumberGenerator(123456) % 3;
-		aliens[i] = new Alien(Alien::images[ranIndex], rand() % (WINDOW_W * 800 / 900), 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900, ranIndex);
+		// aliens[i] = new Alien(Alien::images[ranIndex], rand() % (WINDOW_W * 800 / 900), 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900, ranIndex);
+		aliens[i] = new Alien(Alien::images[ranIndex], ranIndex);
 	}
 }
 
