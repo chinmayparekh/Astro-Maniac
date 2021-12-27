@@ -24,7 +24,7 @@ void Player::handleEvents()
         switch (Window::event.key.keysym.sym)
         {
         case SDLK_a: //going right
-            if (getX() > WINDOW_W * 750 / 900)
+            if (getX() > WINDOW_W - destRect.w - 1)
             {
                 vel_X = 0;
             }
