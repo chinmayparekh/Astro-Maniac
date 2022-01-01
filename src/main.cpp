@@ -1,4 +1,5 @@
 #include "../include/Game.hpp"
+#include "../include/Cntrl_Window.hpp"
 #include <fstream>
 #include <string>
 Game *game = nullptr;
@@ -37,8 +38,8 @@ int main(int argc, char *argv[])
     fileRead(file_input);
 
     Window *win = new Window();
-    win->init("First Window ", WINDOW_W, WINDOW_H, false);
-    while (win->running())
+    win->init("MENU", WINDOW_W, WINDOW_H, false);
+    while (win->running() /*|| win->running1()*/)
     {
         frameStart = SDL_GetTicks();
         win->handleEvents();
@@ -51,6 +52,24 @@ int main(int argc, char *argv[])
             SDL_Delay(frameDelay - frameTime);
         }
     }
+
+    /*Window *helpWin = new Cntrl_Window();
+    helpWin->init("Controls", WINDOW_W, WINDOW_H, false);
+    while (helpWin -> running1())
+    {
+        frameStart = SDL_GetTicks();
+        helpWin->handleEvents();
+        helpWin->update();
+        helpWin->render();
+        frameTime = SDL_GetTicks() - frameStart;
+
+        if (frameDelay > frameTime)
+        {
+            SDL_Delay(frameDelay - frameTime);
+        }
+    }*/ 
+
+
     int hScore;
     if(scores.size())
         hScore = scores[0];

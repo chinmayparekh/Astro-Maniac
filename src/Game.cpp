@@ -44,7 +44,7 @@ void Game::init(const char *title, int width, int height, bool fullscreen, int h
 	this->highScore = highScore;
 	player = new Player("../images/rocket.png", WINDOW_W * 430 / 900, WINDOW_H * 710 / 900, 170 * WINDOW_W / 900, 170 * WINDOW_H / 900);
 	obstacle = new Obstacle("../images/meteor.png", WINDOW_W * 850 / 900, WINDOW_H * 400 / 900, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
-	fuel = new Fuel("../images/fuel.jpg", WINDOW_W * 430 / 900, 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
+	fuel = new Fuel("../images/fUeL.png", WINDOW_W * 430 / 900, 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
 	background1 = new Background("../mages/space.png", WINDOW_W * 0, 0, WINDOW_W, WINDOW_H);
 	background2 = new Background("../images/space.png", WINDOW_W * 0, -WINDOW_H, WINDOW_W, WINDOW_H);
 	score = new Score();
