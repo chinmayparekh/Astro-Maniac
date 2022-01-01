@@ -14,6 +14,7 @@ public:
     virtual void handleEvents();
     virtual void update();
     bool running() { return isRunning; }
+    bool running1() { return is_Running; } 
     virtual void render();
     virtual void renderNew(){}
     void clean();
@@ -30,6 +31,7 @@ public:
 
 protected:
     bool isRunning = false;
+    bool is_Running = false;
     int cnt = 0;
     SDL_Window *window;
 };

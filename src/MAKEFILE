@@ -1,0 +1,4 @@
+CC = g++
+TARGET = game
+$(TARGET): main.cpp Game.cpp GameObject.cpp TextureManager.cpp Obstacle.cpp Player.cpp Background.cpp Cntrl_Window.cpp Audio.cpp Score.cpp Fuel.cpp Alien.cpp Asteroid.cpp Bullet.cpp Button.cpp Window.cpp
+	$(CC) main.cpp Game.cpp GameObject.cpp TextureManager.cpp Obstacle.cpp Player.cpp Background.cpp Cntrl_Window.cpp Audio.cpp Score.cpp Fuel.cpp Alien.cpp Asteroid.cpp Bullet.cpp Button.cpp Window.cpp -o ./$(TARGET) -lSDL2 -lSDL2_image -lSDL2_ttf

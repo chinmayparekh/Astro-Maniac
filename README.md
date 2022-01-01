@@ -19,7 +19,7 @@
 | Chinmay Parekh     |    Created game window,managed player movement,randomized spawning of enemies, collision detection and made file-based leaderboard system .    |
 | Pavan Thanay                     |  Randomized spawning of enemies and meteors, managed animations,generalizing of code,background movement.    | 
 | Tejdeep Gutta                    |  Made the GameObject,spritesheets,displayed dynamic score and generaliztion of code. | 
-| Yash Mogal                        | |
+| Yash Mogal                        |    Made the transition between different windows, displaying text and image on the windows and added background music to the game.    |
 | Pratham Dandale                         |    |
 
 ---
