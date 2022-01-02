@@ -25,6 +25,7 @@ public:
     void update0();
     void update1();
     void update2();
+    void updateBullet();
     void setPosition();
     bool AlienReachedEndpoint();
     void Render();
@@ -39,6 +40,7 @@ private:
     int index;
     int c = 0;
     int im;
+    Alien* bullet = NULL;
 };
 
 #endif
