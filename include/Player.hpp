@@ -10,9 +10,7 @@ public:
 
     int getVelX() { return vel_X; }
     int getVelY() { return vel_Y; }
-    // void handleEvents();
     void handleEvents();
-    // void Animate();
     void Animate(int i, int dir);
     void Render();
     bool isMoving() { return moving; }

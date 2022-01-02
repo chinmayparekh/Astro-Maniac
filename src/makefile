@@ -5,4 +5,4 @@ play: $(all_sources)
 
 #command to compile and run:
 #make
-#./run
+#./run scoresheet.txt

@@ -3,15 +3,15 @@
 ### Team members:
 ---
 
-                Chinmay Parekh-IMT2020069
-                Pavan Thanay
-                Tejdeep Gutta
-                Yash Mogal
-                Pratham Dandale
+                Chinmay Parekh- IMT2020069
+                Pavan Thanay - IMT2020024
+                Tejdeep Gutta - IMT2020102
+                Yash Mogal - IMT2020537
+                Pratham Dandale - IMT2020038
 ---
                 
 
-### Contribution
+### Contributions
 ---
 
 | Name                               | Contribution                                                     |
@@ -24,35 +24,34 @@
 
 ---
 
-## For installing virtual environment
----
 
-On macOS and Linux:
-python3 -m pip3 install --user virtualenv
-
-On Windows:
-py -m pip3 install --user virtualenv
-
-## For creating virtual environment
----
-
-On macOS and Linux:
-python3 -m venv env
-
-On Windows:
-py -m venv env
-
-## For activating the virtual environment
----
-
-On macOS and Linux:
-source env/bin/activate
-
-On Windows:
-.\env\Scripts\activate
-
-## Use the following command in your terminal
+## Use the following command in your terminal to clone the repository
 ---
 
 git clone https://github.com/chinmayparekh/Astro-Maniac.git
 
+## About Game
+---
+
+Astro-Maniac is a single-player endless-running space game. In which, the player controls the Spaceship at the bottom of the screen, which can move horizontally. Various obstacles (Alien, UFO, Asteroids, and Meteoroids) will be approaching the Spaceship. If any of the objects touch the Spaceship the player loses the game. Also, the player has to collect fuel tanks which will be spawning along with the obstacles to keep the game going. On missing three consecutive fuels the game comes to an end. In order to dodge the obstacles, the player has to move the spaceship left or right by pressing D and A from the keyboard respectively. This game becomes challenging as our mind has developed muscle memory of D as Right move and  A as left move.
+
+## Requirements
+---
+
+Instructions for installing SDL2: 
+For Windows: Go to the SDL2 website and head to the download page. Under Development Libraries choose SDL2-devel- [VERSION NUMBER] -VC.zip. Unzip and you will see several folders with the names docs, include, and lib. include contains the header files which we will be needing soon. Create a simple C++ VS project and copy/move the include directory in your project folder. Same thing with lib. Now in lib there exists two folders: x64 and x86.
+In x86 contains the 32-bit version of the library whereas in x64 contains the 64-bit version
+
+For Linux (Ubuntu): Enter the following command in terminal:
+sudo apt-get install libsdl2-dev
+
+For installing other libraries run the following command:
+sudo apt-get install libsdl2-image-dev
+sudo apt-get install libsdl2-ttf-dev
+
+
+## References
+---
+
+https://lazyfoo.net/tutorials/SDL/index.php
+https://www.youtube.com/channel/UCAM9ZPgEIdeHAsmG50wqL1g

@@ -14,9 +14,9 @@ public:
     virtual void handleEvents();
     virtual void update(int wn);
     bool running() { return isRunning; }
-    bool running1() { return is_Running; } 
+    bool running1() { return is_Running; }
     virtual void render();
-    virtual void renderNew(){}
+    virtual void renderNew() {}
     void clean();
     static int randomNumberGenerator(int limit)
     {

@@ -68,15 +68,18 @@ int main(int argc, char *argv[])
         frameStart = SDL_GetTicks();
         game->handleEvents();
         game->update(wn);
+        if (!game->running())
+        {
+            break;
+        }
         game->render();
         frameTime = SDL_GetTicks() - frameStart;
-
         if (frameDelay > frameTime)
         {
             SDL_Delay(frameDelay - frameTime);
         }
     }
-    fileWrite(file_output, scoreKeeper / 10);
     game->clean();
+    fileWrite(file_output, scoreKeeper / 10);
     return 0;
 }
