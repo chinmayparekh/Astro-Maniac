@@ -12,7 +12,7 @@ public:
 
     virtual void init(const char *title, int width, int height, bool fullscreen);
     virtual void handleEvents();
-    virtual void update();
+    virtual void update(int wn);
     bool running() { return isRunning; }
     bool running1() { return is_Running; } 
     virtual void render();
@@ -33,6 +33,8 @@ protected:
     bool isRunning = false;
     bool is_Running = false;
     int cnt = 0;
+    int winno;
+    int t = 0;
     SDL_Window *window;
 };
 

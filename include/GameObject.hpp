@@ -18,6 +18,7 @@ public:
     void setY(float y) { ypos = y; }
     int getHeight() { return h; }
     int getWidth() { return w; }
+    SDL_Texture* getTexture(){return objTexture;}
     void handleEvents();
     SDL_Rect *getSrcRect() { return &srcRect; }
     SDL_Rect *getdestRect() { return &destRect; }

@@ -13,7 +13,7 @@ public:
     void setHighScore(int hs) { highScore = hs; }
 
     void handleEvents();
-    void update();
+    void update(int wn);
     void renderNew();
     int highScore;
 };
