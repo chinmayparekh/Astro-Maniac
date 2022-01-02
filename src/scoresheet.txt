@@ -1,3 +1,9 @@
+Score = 182
+Score = 135
 Score = 112
+Score = 70
+Score = 44
+Score = 40
+Score = 23
 Score = 22
 Score = 16

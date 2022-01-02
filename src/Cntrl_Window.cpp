@@ -19,7 +19,7 @@ void Cntrl_Window::init(const char *title, int width, int height, bool fullscree
     Window::init(title, width, height, fullscreen);
 
     bgnd1 = new Background("images/space.png", 0, 0, 900, 900);
-	bgnd2 = new Background("images/space.png", 0, -900, 900, 900);
+    bgnd2 = new Background("images/space.png", 0, -900, 900, 900);
 }
 
 void Cntrl_Window::handleEvents()
@@ -34,9 +34,9 @@ void Cntrl_Window::handleEvents()
     case SDL_KEYDOWN:
         switch (event.key.keysym.sym)
         {
-            case SDLK_ESCAPE:
-                is_Running = false;
-                break;
+        case SDLK_ESCAPE:
+            is_Running = false;
+            break;
         }
         break;
     default:
@@ -48,7 +48,7 @@ void Cntrl_Window::update()
 {
     if (!is_Running)
         return;
-	Window::update(1);
+    Window::update(1);
     bgnd1->update();
     bgnd2->update();
 }
@@ -64,6 +64,6 @@ void Cntrl_Window::renderNew()
 void Cntrl_Window::Clean()
 {
     SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);    
+    SDL_DestroyRenderer(renderer);
     SDL_Quit();
 }

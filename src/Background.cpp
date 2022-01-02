@@ -10,6 +10,6 @@ Background::Background(const char *texturesheet, float x, float y, int width, in
 void Background::update()
 {
     GameObject::update(0, 1);
-    if(ypos >= WINDOW_H)
+    if (ypos >= WINDOW_H)
         ypos = -WINDOW_H;
 }

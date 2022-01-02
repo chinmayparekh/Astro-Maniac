@@ -3,7 +3,6 @@
 #include "../include/main.hpp"
 
 int ant[][4] = {
-    //x y width and height
     {30, 0, 140, 140},
     {205, 0, 140, 140},
     {380, 0, 140, 140},
@@ -23,7 +22,7 @@ void Player::handleEvents()
         move = 0;
         switch (Window::event.key.keysym.sym)
         {
-        case SDLK_a: //going right
+        case SDLK_a:
             if (getX() > WINDOW_W - destRect.w - 1)
             {
                 vel_X = 0;

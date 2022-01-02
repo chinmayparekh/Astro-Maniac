@@ -38,13 +38,8 @@ void textwindow::render(int clickn)
 	{
 		fprintf(stderr, "error: font not found\n");
 		exit(EXIT_FAILURE);
-        // return;
 	}
 	std::string hs = " ";
-	// if(highScore < time)
-	// 	hs = "High Score: " + std::to_string(time);
-	// else
-	// 	hs = "High Score: " + std::to_string(highScore);
         
 	if(clickn == 0)
     {
@@ -65,7 +60,7 @@ void textwindow::render(int clickn)
 		get_tar(Game::renderer, 150, 450, str.c_str(), font1, &tx, &r);
         SDL_RenderCopy(Game::renderer, tx, NULL, &r);
 		std::string str1 = "Click D to move left";
-		get_tar(Game::renderer, 150, 500, str.c_str(), font1, &tx, &r);
+		get_tar(Game::renderer, 150, 500, str1.c_str(), font1, &tx, &r);
         SDL_RenderCopy(Game::renderer, tx, NULL, &r);
 
 		std::string cmd = "Press 'N' and space bar to play game";

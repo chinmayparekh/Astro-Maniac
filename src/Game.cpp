@@ -68,7 +68,7 @@ void Game::handleEvents()
 	}
 }
 
-bool IntersectRect(SDL_Rect *r1, SDL_Rect *r2) //checking collision
+bool IntersectRect(SDL_Rect *r1, SDL_Rect *r2)
 {
 	return !(r2->x > (r1->x + r1->w / 2) || (r2->x + r2->w / 2) < r1->x || r2->y > (r1->y + r1->h / 2) || (r2->y + r2->h / 2) < r1->y);
 }
@@ -100,16 +100,15 @@ void Game::update(int wn)
 	if (player != NULL)
 	{
 		player->update(a, 0);
-		//obstacle->update(-2, 2);
-		if(obstacle->getY() > 900)
+		if (obstacle->getY() > 900)
 		{
 			obstacle->update(500, -500);
 		}
-		else 
+		else
 		{
-		    obstacle->update(-2, 2);
+			obstacle->update(-2, 2);
 		}
-		if(obstacle1->getY() > 900)
+		if (obstacle1->getY() > 900)
 		{
 			obstacle1->update(700, -700);
 		}
@@ -121,7 +120,6 @@ void Game::update(int wn)
 			aliens[i]->update();
 	}
 	fuel->update(player);
-	//put isRunning at the end
 	isRunning = isDead();
 }
 
@@ -130,7 +128,6 @@ void Game::renderNew()
 	if (!isRunning)
 		return;
 	sb++;
-	//sdl render clear always first
 	if (player != NULL)
 	{
 		player->Render();
@@ -143,6 +140,4 @@ void Game::renderNew()
 		fuel->Render();
 	}
 	score->render(sb, this->highScore);
-
-	//sdl render present at end
 }

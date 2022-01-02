@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 
     Window *win = new Window();
     win->init("MENU", WINDOW_W, WINDOW_H, false);
-    while (win->running() /*|| win->running1()*/)
+    while (win->running())
     {
         frameStart = SDL_GetTicks();
         win->handleEvents();
@@ -53,26 +53,9 @@ int main(int argc, char *argv[])
             SDL_Delay(frameDelay - frameTime);
         }
     }
-
-    /*Window *helpWin = new Cntrl_Window();
-    helpWin->init("Controls", WINDOW_W, WINDOW_H, false);
-    while (helpWin -> running1())
-    {
-        frameStart = SDL_GetTicks();
-        helpWin->handleEvents();
-        helpWin->update();
-        helpWin->render();
-        frameTime = SDL_GetTicks() - frameStart;
-
-        if (frameDelay > frameTime)
-        {
-            SDL_Delay(frameDelay - frameTime);
-        }
-    }*/ 
-
     wn = 1;
     int hScore;
-    if(scores.size())
+    if (scores.size())
         hScore = scores[0];
     else
         hScore = 0;

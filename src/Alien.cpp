@@ -18,7 +18,6 @@ Alien::Alien(const char *texturesheet, int index) : GameObject(texturesheet, 0, 
 int Alien::spawnRegion = 1;
 
 int ufo[][4] = {
-    //x y width and height
     {0, 6, 210, 90},
     {261, 6, 214, 90},
     {521, 6, 213, 90},

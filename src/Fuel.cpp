@@ -9,7 +9,7 @@ inline double distanceSq(float x1, float y1, float x2, float y2)
 }
 bool Fuel::tookFuel(GameObject *go, float dis)
 {
-    if ((distanceSq(go->getX(), go->getY(), getX(), getY()) < dis)) //checking collision
+    if ((distanceSq(go->getX(), go->getY(), getX(), getY()) < dis))
     {
         return true;
     }
