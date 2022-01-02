@@ -3,6 +3,7 @@
 #include "../include/Background.hpp"
 #include "../include/Button.hpp"
 #include "../include/Audio.hpp"
+#include "../include/textwindow.hpp"
 using namespace std;
 
 Audio sound;
@@ -11,6 +12,7 @@ Background *bg2;
 //Button *start;
 //Button *help;
 //Button *quit;
+textwindow *txt = NULL;
 
 Window::Window()
 {
@@ -45,6 +47,7 @@ void Window::init(const char *title, int width, int height, bool fullscreen)
     }
     bg1 = new Background("../images/space.png", 0, 0, 900, 900);
     bg2 = new Background("../images/space.png", 0, -900, 900, 900);
+    txt = new textwindow();
     //start = new Button("../images/startButton.png", WINDOW_W * 430 / 900, WINDOW_H * 710 / 900, 170 * WINDOW_W / 900, 170 * WINDOW_H / 900);
     //help = new Button("../images/helpButton.png", WINDOW_W * 430 / 900, WINDOW_H * 710 / 900, 170 * WINDOW_W / 900, 170 * WINDOW_H / 900);
     //quit = new Button("../images/quitButton.png", WINDOW_W * 430 / 900, WINDOW_H * 710 / 900, 170 * WINDOW_W / 900, 170 * WINDOW_H / 900);
@@ -63,15 +66,18 @@ void Window::handleEvents()
     case SDL_KEYDOWN:
         switch (event.key.keysym.sym)
         {
-        case SDLK_ESCAPE:
-            isRunning = false;
-            break;
-        /*case SDLK_RETURN:
-            isRunning = false;
-            break;
-        case SDLK_SPACE:
-            is_Running = false;
-            break;*/
+            case SDLK_ESCAPE:
+                isRunning = false;
+                break;
+            case SDLK_SPACE:
+                isRunning = false;
+                break;
+            case SDLK_n:
+                t+=1;
+                break;
+            case SDL_SCANCODE_RETURN2:
+                isRunning = false;
+                break;
         }
         break;
     default:
@@ -79,7 +85,7 @@ void Window::handleEvents()
     }
 }
 
-void Window::update()
+void Window::update(int wn)
 {
     if (!isRunning)
         return;
@@ -87,6 +93,8 @@ void Window::update()
         return;*/    
     bg1->update();
     bg2->update();
+    winno = wn;
+
 }
 
 void Window::render()
@@ -94,10 +102,15 @@ void Window::render()
     SDL_RenderClear(renderer);
     bg1->Render();
     bg2->Render();
+    if(winno == 0)
+    {
+        txt->render(t);
+    }  
     //start->Render();
     renderNew();
     SDL_RenderPresent(renderer);
     //sound.play();
+    
 }
 
 void Window::clean()

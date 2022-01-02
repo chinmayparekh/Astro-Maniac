@@ -48,7 +48,7 @@ void Cntrl_Window::update()
 {
     if (!is_Running)
         return;
-	Window::update();
+	Window::update(1);
     bgnd1->update();
     bgnd2->update();
 }

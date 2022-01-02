@@ -4,6 +4,7 @@
 #include <string>
 Game *game = nullptr;
 vector<int> scores;
+int wn = 0;
 void fileWrite(fstream &filepointer, int scoreKeeper)
 {
     scores.push_back(scoreKeeper);
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
     {
         frameStart = SDL_GetTicks();
         win->handleEvents();
-        win->update();
+        win->update(wn);
         win->render();
         frameTime = SDL_GetTicks() - frameStart;
 
@@ -69,7 +70,7 @@ int main(int argc, char *argv[])
         }
     }*/ 
 
-
+    wn = 1;
     int hScore;
     if(scores.size())
         hScore = scores[0];
@@ -83,7 +84,7 @@ int main(int argc, char *argv[])
         scoreKeeper++;
         frameStart = SDL_GetTicks();
         game->handleEvents();
-        game->update();
+        game->update(wn);
         game->render();
         frameTime = SDL_GetTicks() - frameStart;
 

@@ -12,6 +12,7 @@
 
 Player *player;
 Obstacle *obstacle;
+Obstacle *obstacle1;
 Fuel *fuel;
 Background *background1;
 Background *background2;
@@ -44,7 +45,8 @@ void Game::init(const char *title, int width, int height, bool fullscreen, int h
 	this->highScore = highScore;
 	player = new Player("../images/rocket.png", WINDOW_W * 430 / 900, WINDOW_H * 710 / 900, 170 * WINDOW_W / 900, 170 * WINDOW_H / 900);
 	obstacle = new Obstacle("../images/meteor.png", WINDOW_W * 850 / 900, WINDOW_H * 400 / 900, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
-	fuel = new Fuel("../images/fUeL.png", WINDOW_W * 430 / 900, 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
+	obstacle1 = new Obstacle("../images/meteor.png", WINDOW_W * 850 / 900, WINDOW_H * 200 / 900, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
+	fuel = new Fuel("../images/nitrofuel.png", WINDOW_W * 430 / 900, 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
 	background1 = new Background("../mages/space.png", WINDOW_W * 0, 0, WINDOW_W, WINDOW_H);
 	background2 = new Background("../images/space.png", WINDOW_W * 0, -WINDOW_H, WINDOW_W, WINDOW_H);
 	score = new Score();
@@ -75,6 +77,8 @@ bool isDead()
 {
 	if (IntersectRect(obstacle->getdestRect(), player->getdestRect()))
 		return false;
+	if (IntersectRect(obstacle1->getdestRect(), player->getdestRect()))
+		return false;
 	for (int i = 0; i < 3; i++)
 	{
 		if (IntersectRect(aliens[i]->getdestRect(), player->getdestRect()))
@@ -87,16 +91,32 @@ bool isDead()
 	return true;
 }
 
-void Game::update()
+void Game::update(int wn)
 {
 	if (!isRunning)
 		return;
-	Window::update();
+	Window::update(wn);
 
 	if (player != NULL)
 	{
 		player->update(a, 0);
-		obstacle->update(-2, 2);
+		//obstacle->update(-2, 2);
+		if(obstacle->getY() > 900)
+		{
+			obstacle->update(500, -500);
+		}
+		else 
+		{
+		    obstacle->update(-2, 2);
+		}
+		if(obstacle1->getY() > 900)
+		{
+			obstacle1->update(700, -700);
+		}
+		else
+		{
+			obstacle1->update(-2, 2);
+		}
 		for (int i = 0; i < 3; i++)
 			aliens[i]->update();
 	}
@@ -119,6 +139,7 @@ void Game::renderNew()
 			aliens[i]->Render();
 		}
 		obstacle->Render();
+		obstacle1->Render();
 		fuel->Render();
 	}
 	score->render(sb, this->highScore);
