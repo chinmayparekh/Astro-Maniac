@@ -2,6 +2,7 @@
 #include "../include/Alien.hpp"
 #include "../include/main.hpp"
 #include "../include/Game.hpp"
+#include "../include/GameObject.hpp"
 #include <time.h>
 #include <math.h>
 using namespace std;
@@ -18,6 +19,7 @@ Alien::Alien(const char *texturesheet, int index) : GameObject(texturesheet, 0, 
 int Alien::spawnRegion = 1;
 
 int ufo[][4] = {
+    //x y width and height
     {0, 6, 210, 90},
     {261, 6, 214, 90},
     {521, 6, 213, 90},
@@ -30,15 +32,18 @@ void Alien::update()
 {
     switch (index)
     {
-    case 0:
-        update0();
-        break;
-    case 1:
-        update1();
-        break;
-    case 2:
-        update2();
-        break;
+        case 0:
+            update0();
+            break;
+        case 1:
+            update1();
+            break;
+        case 2:
+            update2();
+            break;
+        case 3:
+            updateBullet();
+            break;
     }
 
     destRect.x = xpos;
@@ -62,6 +67,16 @@ void Alien::update2()
 {
     xpos += 0;
     ypos += 2;
+    if(bullet == NULL)
+        bullet = new Alien("../images/newBullet.png", xpos, ypos, 100, 100, 3);
+    bullet->update();
+}
+
+void Alien::updateBullet()
+{
+    xpos += 0;
+    ypos += 5;
+
 }
 
 bool Alien::AlienReachedEndpoint()
@@ -111,18 +126,26 @@ void Alien::Render()
             im = 6;
         }
         Animate(im);
+        SDL_RenderCopy(Game::renderer, bullet->getTexture(), NULL, bullet->getdestRect());
+
+        // bullet->Render();
     }
     else
     {
         GameObject::Render();
     }
 
-    if (reachedEnd)
+    if (reachedEnd && index != 3)
     {
         index = Game::randomNumberGenerator(46578) % 3;
         objTexture = TextureManager::LoadTexture(images[index]);
         setPosition();
         reachedEnd = false;
+        if(bullet)
+        {
+            delete(bullet);
+            bullet = NULL;
+        }
     }
 }
 
