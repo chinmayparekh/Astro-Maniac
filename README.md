@@ -20,7 +20,7 @@
 | Pavan Thanay                     |  Randomized spawning of enemies and meteors, managed animations,generalizing of code,background movement.    | 
 | Tejdeep Gutta                    |  Made the GameObject,spritesheets,displayed dynamic score and generaliztion of code, Managed animations. | 
 | Yash Mogal                        |    Made the transition between different windows, displaying text and image on the windows and added background music to the game.    |
-| Pratham Dandale                         |    |
+| Pratham Dandale                         | Made the UFO shoot a bullet whenever an alien in the UFO was spawned.   |
 
 ---
 
