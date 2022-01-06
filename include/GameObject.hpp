@@ -8,7 +8,10 @@ class GameObject
 {
 public:
     GameObject(const char *texturesheet, float x, float y, int width, int height);
-    ~GameObject(){};
+    virtual ~GameObject()
+    {
+        SDL_DestroyTexture(objTexture);
+    }
 
     void update(float p, float q);
     void Render();

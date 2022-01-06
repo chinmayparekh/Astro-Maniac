@@ -6,7 +6,7 @@ class Obstacle : public GameObject
 {
 public:
     Obstacle(const char *texturesheet, int x, int y, int width, int height);
-    ~Obstacle();
+    ~Obstacle(){}
 };
 
 #endif

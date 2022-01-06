@@ -6,7 +6,7 @@ class Fuel : public GameObject
 {
 public:
     Fuel(const char *texturesheet, int x, int y, int width, int height);
-    ~Fuel();
+    ~Fuel(){}
     virtual void update(Player *player);
     virtual void Render();
     void setisCollected(bool isCollected)

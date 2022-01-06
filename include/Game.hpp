@@ -15,6 +15,7 @@ public:
     void handleEvents();
     void update(int wn);
     void renderNew();
+    void clean();
     int highScore;
 };
 

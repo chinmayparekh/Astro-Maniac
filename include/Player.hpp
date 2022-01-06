@@ -6,7 +6,7 @@ class Player : public GameObject
 {
 public:
     Player(const char *texturesheet, float x, float y, int width, int height);
-    ~Player();
+    ~Player(){}
 
     int getVelX() { return vel_X; }
     int getVelY() { return vel_Y; }

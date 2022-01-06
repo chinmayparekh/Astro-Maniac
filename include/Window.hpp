@@ -8,7 +8,7 @@ class Window
 {
 public:
     Window();
-    ~Window();
+    virtual ~Window();
 
     virtual void init(const char *title, int width, int height, bool fullscreen);
     virtual void handleEvents();
