@@ -11,7 +11,7 @@
 ---
                 
 
-### Contributions
+## Contributions
 ---
 
 | Name                               | Contribution                                                     |
@@ -20,12 +20,12 @@
 | Pavan Thanay                     |  Randomized spawning of enemies and meteors, managed animations,generalizing of code,background movement.    | 
 | Tejdeep Gutta                    |  Made the GameObject,spritesheets,displayed dynamic score and generaliztion of code, Managed animations. | 
 | Yash Mogal                        |    Made the transition between different windows, displaying text and image on the windows and added background music to the game.    |
-| Pratham Dandale                         | Made the UFO shoot a bullet whenever an alien in the UFO was spawned.   |
+| Pratham Dandale                         | Implemented randomized spawning of fuel and its collision detection and made makefile  |
 
 ---
 
 
-## Use the following command in your terminal to clone the repository
+### Use the following command in your terminal to clone the repository
 ---
 
 git clone https://github.com/chinmayparekh/Astro-Maniac.git
@@ -54,4 +54,18 @@ sudo apt-get install libsdl2-ttf-dev
 ---
 
 https://lazyfoo.net/tutorials/SDL/index.php
+
+
 https://www.youtube.com/channel/UCAM9ZPgEIdeHAsmG50wqL1g
+
+## Running the code
+---
+
+To compile and run the code:
+
+    make
+    ./run scoresheet.txt
+
+## Images
+---
+
