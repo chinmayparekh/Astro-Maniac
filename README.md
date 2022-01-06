@@ -68,4 +68,11 @@ To compile and run the code:
 
 ## Images
 ---
+![menu](https://user-images.githubusercontent.com/76399431/148392860-2e0f5641-ab70-4990-9b6a-65b68a952c09.png)
+
+![controls](https://user-images.githubusercontent.com/76399431/148392977-c3dcd484-0439-440b-a66e-3679fd8eec20.png)
+
+![game](https://user-images.githubusercontent.com/76399431/148393141-2ed0fb1d-671b-4690-ae3d-3e3dd230a9b0.png)
+
+
 
