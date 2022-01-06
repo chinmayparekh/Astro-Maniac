@@ -34,9 +34,10 @@ int main(int argc, char *argv[])
     fstream file_input;
     fstream file_output;
     file_input.open("scoresheet.txt");
-    file_output.open(argv[1]);
-    int scoreKeeper = 0;
     fileRead(file_input);
+    file_input.close();
+    
+    int scoreKeeper = 0;
 
     Window *win = new Window();
     win->init("MENU", WINDOW_W, WINDOW_H, false);
@@ -61,6 +62,8 @@ int main(int argc, char *argv[])
         hScore = 0;
 
     game = new Game();
+    // win->clean();
+    // delete(win);
     game->init("Astro Maniac ", WINDOW_W, WINDOW_H, false, hScore);
     while (game->running())
     {
@@ -79,7 +82,16 @@ int main(int argc, char *argv[])
             SDL_Delay(frameDelay - frameTime);
         }
     }
-    game->clean();
+    // game->clean();
+    win->clean();
+    delete(win);
+    delete(game);
+
+    // cout << "Window cleared" << endl;
+    // cout << "Window deleted" << endl;
+    // cout << "Game cleared" << endl;
+    file_output.open(argv[1]);
     fileWrite(file_output, scoreKeeper / 10);
+    file_output.close();
     return 0;
 }

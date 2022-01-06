@@ -12,6 +12,8 @@ void get_text_and_rect(SDL_Renderer *renderer, int x, int y, const char *text, T
 	SDL_Color bColor = {0, 0, 0, 0};
 
 	surface = TTF_RenderText_Shaded(font, text, textColor, bColor);
+	if(*texture)
+		SDL_DestroyTexture(*texture);
 	*texture = SDL_CreateTextureFromSurface(renderer, surface);
 	text_width = surface->w;
 	text_height = surface->h;
@@ -48,4 +50,5 @@ void Score::render(int cnt, int highScore)
 	SDL_RenderCopy(Game::renderer, tx, NULL, &r);
 	get_text_and_rect(Game::renderer, WINDOW_W * 650 / 900, 0, hs.c_str(), font1, &tx1, &r1);
 	SDL_RenderCopy(Game::renderer, tx1, NULL, &r1);
+	TTF_CloseFont(font1);
 }

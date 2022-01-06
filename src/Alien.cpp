@@ -137,6 +137,8 @@ void Alien::Render()
 
     if (reachedEnd && index != 3)
     {
+        // delete(objTexture);
+        SDL_DestroyTexture(objTexture);
         index = Game::randomNumberGenerator(46578) % 3;
         objTexture = TextureManager::LoadTexture(images[index]);
         setPosition();

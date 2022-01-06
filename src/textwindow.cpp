@@ -12,6 +12,8 @@ void get_tar(SDL_Renderer *renderer, int x, int y, const char *text, TTF_Font *f
 	SDL_Color bColor = {0, 0, 0, 0};
 
 	surface = TTF_RenderText_Shaded(font, text, textColor, bColor);
+	if(*texture)
+		SDL_DestroyTexture(*texture);
 	*texture = SDL_CreateTextureFromSurface(renderer, surface);
 	text_width = surface->w;
 	text_height = surface->h;
@@ -26,6 +28,15 @@ void get_tar(SDL_Renderer *renderer, int x, int y, const char *text, TTF_Font *f
 textwindow::textwindow()
 {
     TTF_Init();
+}
+
+textwindow::~textwindow()
+{
+        if(tx)
+            SDL_DestroyTexture(tx);
+        if(tx1)
+            SDL_DestroyTexture(tx1);
+        TTF_Quit();
 }
 
 void textwindow::render(int clickn)
@@ -74,6 +85,8 @@ void textwindow::render(int clickn)
         get_tar(Game::renderer, 0, 0, hs.c_str(), font1, &tx, &r);
         SDL_RenderCopy(Game::renderer, tx, NULL, &r);
     }
+	TTF_CloseFont(font1);
+	TTF_CloseFont(font2);
 
     
 }

@@ -14,8 +14,8 @@ Player *player;
 Obstacle *obstacle;
 Obstacle *obstacle1;
 Fuel *fuel;
-Background *background1;
-Background *background2;
+// Background *background1;
+// Background *background2;
 
 SDL_Renderer *Window::renderer = nullptr;
 SDL_Event Window::event;
@@ -37,6 +37,17 @@ Game::Game()
 
 Game::~Game()
 {
+	// cout << "Reached game" << endl;
+	delete(player);
+	delete(obstacle);
+	delete(obstacle1);
+	for (int i = 0; i < 3; i++)
+		delete(aliens[i]);
+	delete(fuel);
+	// delete(background1);
+	// delete(background2);
+	delete(score);
+	
 }
 
 void Game::init(const char *title, int width, int height, bool fullscreen, int highScore)
@@ -47,8 +58,8 @@ void Game::init(const char *title, int width, int height, bool fullscreen, int h
 	obstacle = new Obstacle("../images/meteor.png", WINDOW_W * 850 / 900, WINDOW_H * 400 / 900, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
 	obstacle1 = new Obstacle("../images/meteor.png", WINDOW_W * 850 / 900, WINDOW_H * 200 / 900, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
 	fuel = new Fuel("../images/nitrofuel.png", WINDOW_W * 430 / 900, 0, 80 * WINDOW_W / 900, 80 * WINDOW_H / 900);
-	background1 = new Background("../mages/space.png", WINDOW_W * 0, 0, WINDOW_W, WINDOW_H);
-	background2 = new Background("../images/space.png", WINDOW_W * 0, -WINDOW_H, WINDOW_W, WINDOW_H);
+	// background1 = new Background("../mages/space.png", WINDOW_W * 0, 0, WINDOW_W, WINDOW_H);
+	// background2 = new Background("../images/space.png", WINDOW_W * 0, -WINDOW_H, WINDOW_W, WINDOW_H);
 	score = new Score();
 
 	for (int i = 0; i < 3; i++)
@@ -140,4 +151,18 @@ void Game::renderNew()
 		fuel->Render();
 	}
 	score->render(sb, this->highScore);
+}
+
+void Game::clean()
+{
+	delete(player);
+	delete(obstacle);
+	delete(obstacle1);
+	for (int i = 0; i < 3; i++)
+		delete(aliens[i]);
+	delete(fuel);
+	// delete(background1);
+	// delete(background2);
+	delete(score);
+	Window::clean();
 }

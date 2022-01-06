@@ -5,7 +5,7 @@
 #include "../include/textwindow.hpp"
 using namespace std;
 
-Audio sound;
+Audio* sound;
 Background *bg1;
 Background *bg2;
 
@@ -17,6 +17,9 @@ Window::Window()
 
 Window::~Window()
 {
+    // SDL_DestroyWindow(window);
+    
+    // cout << "Reached window" << endl;
 }
 
 void Window::init(const char *title, int width, int height, bool fullscreen)
@@ -45,8 +48,9 @@ void Window::init(const char *title, int width, int height, bool fullscreen)
     bg1 = new Background("../images/space.png", 0, 0, 900, 900);
     bg2 = new Background("../images/space.png", 0, -900, 900, 900);
     txt = new textwindow();
-    sound.load("../Music/progress-in-space-11756.wav");
-    sound.play();
+    sound = new Audio();
+    sound->load("../Music/progress-in-space-11756.wav");
+    sound->play();
 }
 
 void Window::handleEvents()
@@ -103,7 +107,12 @@ void Window::render()
 
 void Window::clean()
 {
-    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
-    SDL_Quit();
+    delete(bg1);
+    delete(bg2);
+    delete(sound);
+    delete(txt);
+    SDL_DestroyWindow(window);   
+    TTF_Quit(); 
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
 }
