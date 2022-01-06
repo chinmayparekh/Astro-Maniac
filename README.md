@@ -43,11 +43,15 @@ For Windows: Go to the SDL2 website and head to the download page. Under Develop
 In x86 contains the 32-bit version of the library whereas in x64 contains the 64-bit version
 
 For Linux (Ubuntu): Enter the following command in terminal:
-sudo apt-get install libsdl2-dev
+---
+
+    sudo apt-get install libsdl2-dev
 
 For installing other libraries run the following command:
-sudo apt-get install libsdl2-image-dev
-sudo apt-get install libsdl2-ttf-dev
+---
+
+    sudo apt-get install libsdl2-image-dev
+    sudo apt-get install libsdl2-ttf-dev
 
 
 ## References
