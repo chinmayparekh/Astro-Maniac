@@ -1,5 +1,9 @@
 # C++ Project- Astro Maniac
 
+## Github Link:
+---
+https://github.com/chinmayparekh/Astro-Maniac
+
 ### Team members:
 ---
 
