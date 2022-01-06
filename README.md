@@ -1,4 +1,4 @@
-# C++ Project- Astro Maniac
+# C++ Project- Astro Maniac (Group Number 8)
 
 ## Github Link:
 ---
